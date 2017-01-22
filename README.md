@@ -1,2 +1,2 @@
 0x18-stacks_queues_lifo_fifo
-A Submodule of monty in holbertonschool-low_level_programming
+A Submodule for monty in holbertonschool-low_level_programming
