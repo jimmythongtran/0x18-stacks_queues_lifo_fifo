@@ -43,6 +43,5 @@ stack_t *ret_top(stack_t **top)
 	*top = (*top)->next;
 	*top->prev = NULL;
 
-	free(ret_node);
 	return(ret_node);
 }
