@@ -31,8 +31,8 @@ int main(int argc, char **argv)
 			(THROW ERROR);
 		}
 		sep_cmd = strtok(NULL, " ");
-		data = atoi(sep_cmd = strtok(NULL, " "));
-		return (op(sep_cmd));
+		data = atoi(sep_cmd);
+		return (op(data));
 	}
 	fclose(fp);
 	free();
