@@ -7,14 +7,25 @@
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *push_node;
+	stack *newnode;
 
-	push_node = add_node(stack, line_number);
-	if (push_node == NULL)
-	{
-		printf(PRINT ERROR AND EXIT STATUS);
-	}
-	
+	if (*stack == NULL)
+		return (NULL);
+
+	newnode = malloc(sizeof(stack_t));
+	if (newnode == NULL)
+		return (NULL);
+
+	newnode->n = ***DATA***;
+	newnode->prev = NULL;
+	newnode->next = *top;
+
+	if (*top == NULL)
+		*top = newnode;
+	else:
+		(*top)->prev = newnode;
+	*top = newnode;
+	return(newnode);
 }
 
 /**
@@ -24,13 +35,16 @@ void push(stack_t **stack, unsigned int line_number)
  */
 void pop(stack_t **stack, unsigned int line_number)
 {
-	stack_t *pop_node;
+	stack_t *ret_node;
 
-	pop_node = ret_top(stack);
-	if (pop_node == NULL)
-		return (ERROR and EXIT CODE);
+	if (*stack == NULL)
+		return (NULL);
 
-	free(pop_node);
+	ret_node = *top;
+	*top = (*top)->next;
+	*top->prev = NULL;
+
+	free(ret_node);
 }
 
 /**
@@ -40,11 +54,12 @@ void pop(stack_t **stack, unsigned int line_number)
  */
 void pall(stack_t **stack, unsigned int line_number)
 {
-	stack_t temp;
+	stack_t *temp;
 
 	if (*stack == NULL)
 	{
-		return (ERROR and EXIT CODE);
+		printf("ERROR and EXIT CODE");
+		exit();
 	}
 	temp = *stack;
 	while (temp != NULL)
@@ -54,6 +69,33 @@ void pall(stack_t **stack, unsigned int line_number)
 	}
 }
 
+/**
+ *
+ *
+ *
+ *
+ */
+void pint(stack_t **stack, unsigned int line_number)
+{
+	stack_t *top;
+
+	top = *stack;
+	if (!top)
+		printf("L%d: can't pint, stack empty\n", line_number);
+	while (top != NULL)
+	{
+		printf("%d\n", top->n);
+		top = top->next;
+	}
+}
+
+/**
+ *
+ *
+ *
+ *
+ *
+ */
 int (*get_op_func(char *s))(stack_t, unsigned int)
 {
 	instruction_t ops[] = {
@@ -62,6 +104,7 @@ int (*get_op_func(char *s))(stack_t, unsigned int)
 		{"pall", pall},
 		{NULL, NULL}
 	};
+
 	int i;
 
 	i = 0;

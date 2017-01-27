@@ -11,10 +11,10 @@ int main(int argc, char **argv)
 	char *cmd, *sep_cmd;
 	size_t length;
 	int gl, data;
-	int (*o)(int);
+	void (*op)(stack_t **stack, unsigned int line_number);
+	unsigned int line_number;
 
 	fp = fopen(argv[1], "r");
-	gl = getline(&cmd, &length, fp);
 
 	if (argc != 2)
 	{
@@ -22,19 +22,26 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
+	line_number = 1;
+	gl = getline(&cmd, &length, fp);
 	while (gl >= 0)
 	{
-		sep_cmd = strtok(cmd, " ");
+		sep_cmd = strtok(cmd, " \t\n");
 		op = get_op_func(sep_cmd);
+
 		if (op == NULL)
 		{
-			(THROW ERROR);
+			printf("THROW ERROR");
+			exit(EXIT_FAILURE);
 		}
-		sep_cmd = strtok(NULL, " ");
+		sep_cmd = strtok(NULL, " \t\n");
 		data = atoi(sep_cmd);
 		return (op(data));
+
+		line_number++;
 	}
 	fclose(fp);
-	free();
+	free(op);
+	free(cmd);
 	return(0);
 }
