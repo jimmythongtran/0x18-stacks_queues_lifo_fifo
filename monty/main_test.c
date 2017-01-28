@@ -14,6 +14,8 @@ int main(int argc, char **argv)
 
 	file = argv[1];
 	fp = fopen(file, "r");
+	if (fp == NULL)
+		exit(EXIT_FAILURE);
 
 	if (argc != 2)
 	{
@@ -25,9 +27,11 @@ int main(int argc, char **argv)
 	while (gl >= 0)
 	{
 		sep_cmd = strtok(cmd, " \t\n");
-		printf("%s", sep_cmd);
-
-		sep_cmd = strtok(NULL, " \t\n");
+		while (sep_cmd != NULL)
+		{
+			printf("%s", sep_cmd);
+			sep_cmd = strtok(NULL, " \t\n");
+		}
 		data = atoi(sep_cmd);
 		printf("%d", data);
 
