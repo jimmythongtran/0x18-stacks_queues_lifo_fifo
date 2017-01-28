@@ -27,14 +27,16 @@ int main(int argc, char **argv)
 	while (gl >= 0)
 	{
 		sep_cmd = strtok(cmd, " \t\n");
-		while (sep_cmd != NULL)
+		if (sep_cmd)
 		{
 			printf("%s", sep_cmd);
 			sep_cmd = strtok(NULL, " \t\n");
 		}
-		data = atoi(sep_cmd);
-		printf("%d", data);
-
+		if (sep_cmd)
+		{
+			data = atoi(sep_cmd);
+			printf("%d", data);
+		}
 	}
 	fclose(fp);
 	return(0);
