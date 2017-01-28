@@ -37,6 +37,7 @@ int main(int argc, char **argv)
 			data = atoi(sep_cmd);
 			printf("%d", data);
 		}
+		gl = getline(&cmd, &length, fp);
 	}
 	fclose(fp);
 	return(0);
